@@ -5,21 +5,21 @@ class MemesController < ApplicationController
     @memes = current_user.memes
   end
   
-  def show
-    
-  end
-  
   def new
     @meme = current_user.memes.new
   end
   
   def create
     @meme = current_user.memes.create!(allowed_params)
+    flash[:success] = "You have successfully created a meme!"
     redirect_to memes_path
   end
   
   def destroy
-    
+    @meme = current_user.memes.find(params[:id])
+    @meme.destroy!
+    flash[:success] = "You have successfully removed your meme!"
+    redirect_to memes_path
   end
   
 private
