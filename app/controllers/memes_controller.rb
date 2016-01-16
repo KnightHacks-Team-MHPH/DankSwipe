@@ -10,7 +10,7 @@ class MemesController < ApplicationController
   end
   
   def create
-    @meme = current_user.memes.create!(allowed_params)
+    @meme = current_user.memes.create!(meme_params)
     flash[:success] = "You have successfully created a meme!"
     redirect_to memes_path
   end
@@ -24,12 +24,18 @@ class MemesController < ApplicationController
   
   def swipe_index
     @unseen_meme = get_unseen_meme(current_user)
+    if !@unseen_meme.nil?
+      @meme_investment = @unseen_meme.investments.new
+    end
   end
   
   def swipe_left
     @meme = Meme.find(params[:id])
     @swipe = @meme.swipes.create!(user_id: current_user.id, direction: :left)
     @unseen_meme = get_unseen_meme(current_user)
+    if !@unseen_meme.nil?
+      @meme_investment = @unseen_meme.investments.new
+    end
     
     respond_to do |format|
       format.js
@@ -40,19 +46,33 @@ class MemesController < ApplicationController
     @meme = Meme.find(params[:id])
     @swipe = @meme.swipes.create!(user_id: current_user.id, direction: :right)
     @unseen_meme = get_unseen_meme(current_user)
-    
+    if !@unseen_meme.nil?
+      @meme_investment = @unseen_meme.investments.new
+    end
     respond_to do |format|
       format.js
     end
   end
   
   def invest
-    
+    @meme = Meme.find(params[:id])
+    @swipe = @meme.swipes.create!(user_id: current_user.id, direction: :invest)
+    @investment = @meme.investments.create!(user_id: current_user.id, amount: investment_params[:amount])
+    @unseen_meme = get_unseen_meme(current_user)
+    if !@unseen_meme.nil?
+      @meme_investment = @unseen_meme.investments.new
+    end
+    respond_to do |format|
+      format.js
+    end
   end
   
 private
-  def allowed_params
+  def meme_params
     params.require(:meme).permit(:meme_url)
+  end
+  def investment_params
+    params.require(:investment).permit(:amount)
   end
   
   # only get one meme

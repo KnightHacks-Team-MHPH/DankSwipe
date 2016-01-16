@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
          
   has_many :memes
   has_many :swipes
+  has_many :investments
 end
