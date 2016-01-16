@@ -4,7 +4,7 @@
     .col-lg-4
       = link_to "Left Swipe", left_swipe_path(meme.id), method: :post, remote: true, class: "btn btn-danger"
     .col-lg-4
-      = bootstrap_form_for meme_investment, url: investment_path(meme.id) do |f|
+      = bootstrap_form_for meme_investment, url: investment_path(meme.id), remote: true do |f|
         = f.number_field :amount
         = f.submit
     .col-lg-4

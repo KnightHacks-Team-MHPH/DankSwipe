@@ -56,8 +56,11 @@ class MemesController < ApplicationController
   
   def invest
     @meme = Meme.find(params[:id])
+    # create the swipe as an investment
     @swipe = @meme.swipes.create!(user_id: current_user.id, direction: :invest)
+    # log the investment
     @investment = @meme.investments.create!(user_id: current_user.id, amount: investment_params[:amount])
+    # prep for next meme
     @unseen_meme = get_unseen_meme(current_user)
     if !@unseen_meme.nil?
       @meme_investment = @unseen_meme.investments.new
