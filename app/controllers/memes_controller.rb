@@ -29,7 +29,7 @@ class MemesController < ApplicationController
   def swipe_left
     @meme = Meme.find(params[:id])
     @swipe = @meme.swipes.create!(user_id: current_user.id, direction: :left)
-    @unseen_meme = get_unseen_meme(cur_user)
+    @unseen_meme = get_unseen_meme(current_user)
     
     respond_to do |format|
       format.js
@@ -39,7 +39,7 @@ class MemesController < ApplicationController
   def swipe_right
     @meme = Meme.find(params[:id])
     @swipe = @meme.swipes.create!(user_id: current_user.id, direction: :right)
-    @unseen_meme = get_unseen_meme(cur_user)
+    @unseen_meme = get_unseen_meme(current_user)
     
     respond_to do |format|
       format.js
