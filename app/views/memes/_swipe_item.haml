@@ -1,9 +1,13 @@
 - if !meme.nil?
   = image_tag meme.meme_url, size: "200x200", class: "image-thumbnail"
   .row
-    .col-lg-6
+    .col-lg-4
       = link_to "Left Swipe", left_swipe_path(meme.id), method: :post, remote: true, class: "btn btn-danger"
-    .col-lg-6
+    .col-lg-4
+      = bootstrap_form_for @meme_investment do |f|
+        = f.number_field :amount
+        = f.submit
+    .col-lg-4
       = link_to "Right Swipe", right_swipe_path(meme.id), method: :post, remote: true, class: "btn btn-success"
 - else
   %h1 No Mas Memes

@@ -46,21 +46,13 @@ class MemesController < ApplicationController
     end
   end
   
+  def invest
+    
+  end
+  
 private
   def allowed_params
     params.require(:meme).permit(:meme_url)
-  end
-  
-  # get multiple memes
-  def get_unseen_memes(cur_user)
-    other_memes = Meme.where().not(user_id: cur_user)
-    unseen_memes = []
-    other_memes.each do |meme|
-      if !(meme.swipes.where(user_id: cur_user.id).count > 0)
-        unseen_memes << meme
-      end
-    end
-    return unseen_memes
   end
   
   # only get one meme
