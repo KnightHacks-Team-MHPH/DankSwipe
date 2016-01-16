@@ -1,7 +1,7 @@
 .row
   %h1 My Memes
 .row
-  = link_to "New Meme", "#", class: "btn btn-success"
+  = link_to "New Meme", new_meme_path, class: "btn btn-success"
 .row
   %table.table
     %thead
@@ -12,6 +12,6 @@
       - @memes.each do |meme|
         %tr
           %td= meme.meme_url
-          %td= image_tag meme.meme_url
-          %td Remove
+          %td= image_tag meme.meme_url, size: "200x200"
+          %td= link_to "Remove", meme_path, method: :delete
         
