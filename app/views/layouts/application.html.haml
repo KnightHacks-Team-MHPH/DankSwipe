@@ -38,11 +38,11 @@
             - if user_signed_in?
               %li
                 %p.navbar-text
-                  Shekels Available:
+                  Danks Available:
                   = current_user.currency_available
               %li
                 %p.navbar-text
-                  Shekels Invested:
+                  Danks Invested:
                   = current_user.currency_invested
               %li= link_to "Log Out", destroy_user_session_path, method: :delete
             - else
