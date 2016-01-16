@@ -5,11 +5,17 @@ class MemesController < ApplicationController
     @memes = current_user.memes
   end
   
+  def acquired_memes
+    @memes = current_user.acquired_memes
+  end
+  
   def new
     @meme = current_user.memes.new
   end
   
   def create
+    # note that we dont create it with an owner_id since we dont want this to
+    # show up in acquired memes until after a sale
     @meme = current_user.memes.create!(meme_params)
     flash[:success] = "You have successfully created a meme!"
     redirect_to memes_path
@@ -19,6 +25,13 @@ class MemesController < ApplicationController
     @meme = current_user.memes.find(params[:id])
     @meme.destroy!
     flash[:success] = "You have successfully removed your meme!"
+    redirect_to memes_path
+  end
+  
+  def sell
+    @meme = current_user.memes.find(params[:id])
+    @meme.sell
+    
     redirect_to memes_path
   end
   
@@ -60,6 +73,11 @@ class MemesController < ApplicationController
     @swipe = @meme.swipes.create!(user_id: current_user.id, direction: :invest)
     # log the investment
     @investment = @meme.investments.create!(user_id: current_user.id, amount: investment_params[:amount])
+    
+    # reduce the amount of currency the user has by how much they invested.
+    current_user.currency -= investment_params[:amount].to_i
+    current_user.save!
+    
     # prep for next meme
     @unseen_meme = get_unseen_meme(current_user)
     if !@unseen_meme.nil?
