@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  direction: 1
+  user_id: 1
+  meme_id: 1
+
+two:
+  direction: 1
+  user_id: 1
+  meme_id: 1

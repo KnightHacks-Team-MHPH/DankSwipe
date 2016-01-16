@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+user_1 = User.create!(email: "user1@example.com", password: "password", password_confirmation: "password")
+user_2 = User.create!(email: "user2@example.com", password: "password", password_confirmation: "password")
+
+
+user_2.memes.create!(meme_url: "http://i.imgur.com/VuzpTHC.jpg?1")
+user_2.memes.create!(meme_url: "http://i.imgur.com/9YuOff8.jpg")
+user_2.memes.create!(meme_url: "http://i.imgur.com/hUBGxJV.jpg")
