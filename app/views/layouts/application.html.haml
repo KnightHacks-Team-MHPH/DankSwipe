@@ -29,7 +29,7 @@
         .navbar-collapse.collapse.navbar-responsive-collapse
           %ul.nav.navbar-nav
             - if user_signed_in?
-              %li= link_to "My Memes", "#"
+              %li= link_to "My Memes", memes_path
               %li= link_to "Swipe Memes", "#"
           %ul.nav.navbar-nav.pull-right
             - if user_signed_in?

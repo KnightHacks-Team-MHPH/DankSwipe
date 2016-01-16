@@ -1,7 +1,8 @@
 class MemesController < ApplicationController
   before_action :authenticate_user!
+  
   def index
-    
+    @memes = current_user.memes
   end
   
   def show

@@ -1,0 +1,17 @@
+.row
+  %h1 My Memes
+.row
+  = link_to "New Meme", "#", class: "btn btn-success"
+.row
+  %table.table
+    %thead
+      %th Meme Url
+      %th Meme Pic
+      %th Actions
+    %tbody
+      - @memes.each do |meme|
+        %tr
+          %td= meme.meme_url
+          %td= image_tag meme.meme_url
+          %td Remove
+        
