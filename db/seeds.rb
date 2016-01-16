@@ -9,6 +9,7 @@
 
 user_1 = User.create!(email: "user1@example.com", password: "password", password_confirmation: "password")
 user_2 = User.create!(email: "user2@example.com", password: "password", password_confirmation: "password")
+user_3 = User.create!(email: "user3@example.com", password: "password", password_confirmation: "password")
 
 
 user_2.memes.create!(meme_url: "http://i.imgur.com/VuzpTHC.jpg?1", owner_id: user_2.id)

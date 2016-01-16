@@ -1,0 +1,17 @@
+.row
+  %h1 The Dankest of Memes Acquired
+  %hr
+  
+.row
+  %table.table
+    %thead
+      %th Meme Url
+      %th Meme Pic
+      %th Actions
+    %tbody
+      - @memes.each do |meme|
+        %tr
+          %td= meme.meme_url
+          %td= image_tag meme.meme_url, size: "200x200"
+          %td
+            = link_to "Sell Meme", "#", class: "btn btn-success"

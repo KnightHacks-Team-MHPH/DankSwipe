@@ -24,7 +24,9 @@ class Meme < ActiveRecord::Base
     # give the user the currency for each collected right swipe minus the left swipes
     right_swipes = self.swipes.where(direction: :right, collected: false).count
     left_swipes = self.swipes.where(direction: :left, collected: false).count
+    puts "#{right_swipes} - #{left_swipes}"
     self.user.currency += right_swipes - left_swipes
+    self.user.save!
     
     # we have used them, set them to collected so they wont be recounted in future sales
     self.swipes.each do |swipe|

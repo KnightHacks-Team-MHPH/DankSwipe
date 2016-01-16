@@ -33,7 +33,7 @@
             - if user_signed_in?
               %li= link_to "My Memes", memes_path
               %li= link_to "Swipe Memes", swipe_path
-              %li= link_to "Acquired Memes", "#"
+              %li= link_to "Acquired Memes", acquired_memes_path
           %ul.nav.navbar-nav.pull-right
             - if user_signed_in?
               %li
@@ -55,4 +55,7 @@
           = bootstrap_flash
           = yield
       %footer
-        %p &copy; Company 2016
+        %p
+          Sponsored By
+          = image_tag "eluminati.png", size: "200x100"
+          2016

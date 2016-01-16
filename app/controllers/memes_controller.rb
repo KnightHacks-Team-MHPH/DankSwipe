@@ -2,7 +2,13 @@ class MemesController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @memes = current_user.memes
+    pre_memes = current_user.memes
+    @memes = []
+    pre_memes.each do |meme|
+      if (meme.user_id == meme.owner_id) || ((meme.user_id == current_user.id) && meme.owner_id.nil?)
+        @memes << meme
+      end
+    end
   end
   
   def acquired_memes
