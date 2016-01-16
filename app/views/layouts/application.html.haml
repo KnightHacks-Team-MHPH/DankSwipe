@@ -25,7 +25,9 @@
           %span.icon-bar
           %span.icon-bar
           %span.icon-bar
-        = link_to "DankSwipe", root_path, class: "navbar-brand"
+        .navbar-brand
+          = link_to root_path do
+            = image_tag "dankmemelogo.png"
         .navbar-collapse.collapse.navbar-responsive-collapse
           %ul.nav.navbar-nav
             - if user_signed_in?

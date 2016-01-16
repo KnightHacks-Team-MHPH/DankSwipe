@@ -11,8 +11,8 @@ class Meme < ActiveRecord::Base
     @meme.owner_id = investment_owner.id
     @meme.save!
     
-    # disperse the other investments since they lost
-    @meme.investments.where.not(investment_id: highest_investment.id).each do |investment|
+    # disperse investments once again
+    @meme.investments.each do |investment|
       investment_user = investment.user
       # give the user back its currency
       investment_user.currency += investment.amount.to_i

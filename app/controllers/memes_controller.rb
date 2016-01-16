@@ -31,7 +31,7 @@ class MemesController < ApplicationController
   def sell
     @meme = current_user.memes.find(params[:id])
     @meme.sell
-    
+    flash[:success] = "You have successfully sold your meme!"
     redirect_to memes_path
   end
   
