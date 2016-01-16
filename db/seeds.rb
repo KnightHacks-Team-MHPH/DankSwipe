@@ -15,3 +15,4 @@ user_3 = User.create!(email: "user3@example.com", password: "password", password
 user_2.memes.create!(meme_url: "http://i.imgur.com/VuzpTHC.jpg?1", owner_id: user_2.id)
 user_2.memes.create!(meme_url: "http://i.imgur.com/9YuOff8.jpg", owner_id: user_2.id)
 user_2.memes.create!(meme_url: "http://i.imgur.com/hUBGxJV.jpg", owner_id: user_2.id)
+user_2.memes.create!(meme_url: "http://media.giphy.com/media/315b275sfehgs/giphy-tumblr.gif", owner_id: user_2.id)

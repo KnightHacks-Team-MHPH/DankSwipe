@@ -14,3 +14,4 @@
       = link_to "Right Swipe", right_swipe_path(meme.id), method: :post, remote: true, class: "btn btn-success"
 - else
   %h1 No Mas Memes
+  = javascript_include_tag "https://raw.githubusercontent.com/nthitz/turndownforwhatjs/master/tdfw.js"
