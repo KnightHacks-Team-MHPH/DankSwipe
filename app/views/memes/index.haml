@@ -13,5 +13,7 @@
         %tr
           %td= meme.meme_url
           %td= image_tag meme.meme_url, size: "200x200"
-          %td= link_to "Remove", meme_path(meme.id), method: :delete, class: "btn btn-danger"
+          %td
+            = link_to "Remove", meme_path(meme.id), method: :delete, class: "btn btn-danger"
+            = link_to "Sell", sell_meme_path(meme.id), method: :post, class: "btn btn-success"
         
