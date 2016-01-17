@@ -36,8 +36,12 @@ class MemesController < ApplicationController
   
   def sell
     @meme = current_user.memes.find(params[:id])
-    @meme.sell
-    flash[:success] = "You have successfully sold your meme!"
+    success = @meme.sell
+    if success
+      flash[:success] = "You have successfully sold your meme!"
+    else
+      flash[:error] = "Unfortunately, you can't sell your meme right now."
+    end
     redirect_to memes_path
   end
   
@@ -75,19 +79,27 @@ class MemesController < ApplicationController
   
   def invest
     @meme = Meme.find(params[:id])
-    # create the swipe as an investment
-    @swipe = @meme.swipes.create!(user_id: current_user.id, direction: :invest)
+    @good_investment = false
     # log the investment
-    @investment = @meme.investments.create!(user_id: current_user.id, amount: investment_params[:amount])
-    
-    # reduce the amount of currency the user has by how much they invested.
-    current_user.currency -= investment_params[:amount].to_i
-    current_user.save!
-    
-    # prep for next meme
-    @unseen_meme = get_unseen_meme(current_user)
-    if !@unseen_meme.nil?
-      @meme_investment = @unseen_meme.investments.new
+    if current_user.can_invest?(investment_params[:amount])
+      # create the swipe as an investment
+      @swipe = @meme.swipes.create!(user_id: current_user.id, direction: :invest)
+      
+      @investment = @meme.investments.create!(user_id: current_user.id, amount: investment_params[:amount])
+      
+      # reduce the amount of currency the user has by how much they invested.
+      current_user.currency -= investment_params[:amount].to_i
+      current_user.save!
+      
+      # prep for next meme
+      @unseen_meme = get_unseen_meme(current_user)
+      if !@unseen_meme.nil?
+        @meme_investment = @unseen_meme.investments.new
+      end
+      
+      @good_investment = true
+    else
+      flash[:error] = "You dont have that many danks to invest (wo)man. Come on..."
     end
     respond_to do |format|
       format.js

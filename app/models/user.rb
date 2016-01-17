@@ -20,4 +20,11 @@ class User < ActiveRecord::Base
   def currency_available
     return self.currency
   end
+  
+  def can_invest?(amount)
+    if self.currency >= amount.to_i
+      return true
+    end
+    return false
+  end
 end

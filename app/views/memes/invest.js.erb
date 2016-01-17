@@ -1,1 +1,5 @@
-$('#swipe_item').html('<%= escape_javascript render(partial: "memes/swipe_item", locals: {meme: @unseen_meme, meme_investment: @meme_investment}) %>');
+<% if @good_investment %>
+  $('#swipe_item').html('<%= escape_javascript render(partial: "memes/swipe_item", locals: {meme: @unseen_meme, meme_investment: @meme_investment}) %>');
+<% else %>
+  window.location.href = '<%= swipe_path %>';
+<% end %>
